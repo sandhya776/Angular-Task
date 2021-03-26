@@ -1,12 +1,21 @@
 <perfect-scrollbar>
+  <div class="container-fluid header">
+    <h4>Kanban Board</h4>
+  </div>
+
   <div class="container row" style="text-align: center;">
     <div class="col-md-12">
-      <mat-form-field class="example-full-width">
-        <mat-label>Task Name</mat-label>
-        <input matInput placeholder="Task Name" (keyup)="checkDuplicate()" [formControl]="taskName">
-      </mat-form-field>
-      <button [disabled]="!taskName.value || error" [ngClass]="!taskName.value || error ? 'disabled': ''"
-        (click)="insertTask()" class="createTask">Create Task</button>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Task Name</mat-label>
+          <input type="text" matInput (keyup)="checkDuplicate()" [formControl]="taskName" placeholder="task name">
+          <mat-error *ngIf="taskName.hasError('duplicate')">
+            Duplicate Task Name
+          </mat-error>
+        </mat-form-field>
+        <button [disabled]="!taskName.value || error" [ngClass]="!taskName.value || error ? 'disabled': ''"
+          (click)="insertTask()" class="createTask">Create Task</button>
+      </form>
     </div>
   </div>
 

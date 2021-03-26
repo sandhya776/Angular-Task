@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+
+import * as tasksData from '../assets/data/taskList.json';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,8 @@ import { FormControl } from '@angular/forms';
 })
 
 export class AppComponent implements OnInit {
-  taskName = new FormControl();
-  tasksList: any[] = [];
+  taskName = new FormControl('');
+  tasksList: any[] = tasksData['data'];
   error = false;
   constructor() { }
   ngOnInit() {
@@ -17,8 +19,10 @@ export class AppComponent implements OnInit {
 
   checkDuplicate() {
     this.error = false;
+    this.taskName.clearValidators();
     if (this.tasksList.find(x => x.taskName === this.taskName.value)) {
       this.error = true;
+      this.taskName.setErrors({ duplicate: true });
     }
   }
   insertTask() {
