@@ -1,6 +1,8 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 describe('AppComponent', () => {
+  let fixtureComponent: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -8,10 +10,9 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
   }));
-  it('delete task', () => {
-    // creating app component instance using test bed
-    const fixtureComponent = TestBed.createComponent(AppComponent);
-    // Arrange
+
+  beforeEach(() => {
+    fixtureComponent = TestBed.createComponent(AppComponent);
     fixtureComponent.componentInstance.tasksList = [
       { taskName: 'task1', stage: 1 },
       { taskName: 'task2', stage: 1 },
@@ -19,6 +20,9 @@ describe('AppComponent', () => {
       { taskName: 'task4', stage: 2 },
       { taskName: 'task5', stage: 3 }
     ];
+  });
+
+  it('delete task', () => {
     // Act
     fixtureComponent.componentInstance.deleteTask('task1');
 
@@ -32,38 +36,25 @@ describe('AppComponent', () => {
   });
 
   it('insert task', () => {
-    const fixtureComponent = TestBed.createComponent(AppComponent);
-    // Arrange
-    fixtureComponent.componentInstance.tasksList = [
-      { taskName: 'task2', stage: 1 },
-      { taskName: 'task3', stage: 2 },
-      { taskName: 'task4', stage: 2 },
-    ];
-    fixtureComponent.componentInstance.taskName.setValue('task5')
+    fixtureComponent.componentInstance.taskName.setValue('task6');
     // Act
-
     fixtureComponent.componentInstance.insertTask();
 
     // Assert
     expect(fixtureComponent.componentInstance.tasksList).toEqual([
+      { taskName: 'task1', stage: 1 },
       { taskName: 'task2', stage: 1 },
       { taskName: 'task3', stage: 2 },
       { taskName: 'task4', stage: 2 },
-      { taskName: 'task5', stage: 1 }
+      { taskName: 'task5', stage: 3 },
+      { taskName: 'task6', stage: 1 }
     ]);
   });
 
-
   it('check duplicates', () => {
-    const fixtureComponent = TestBed.createComponent(AppComponent);
-    // Arrange
-    fixtureComponent.componentInstance.tasksList = [
-      { taskName: 'task2', stage: 1 },
-      { taskName: 'task3', stage: 2 },
-      { taskName: 'task4', stage: 2 },
-    ];
     fixtureComponent.componentInstance.taskName.setValue('task2');
     // Act
+
     fixtureComponent.componentInstance.checkDuplicate();
 
     // Assert

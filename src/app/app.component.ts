@@ -3,6 +3,10 @@ import { FormControl, Validators } from '@angular/forms';
 
 import * as tasksData from '../assets/data/taskList.json';
 
+export interface TaskList {
+  taskName: string;
+  stage: number;
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +15,7 @@ import * as tasksData from '../assets/data/taskList.json';
 
 export class AppComponent implements OnInit {
   taskName = new FormControl('');
-  tasksList: any[] = tasksData['data'];
+  tasksList: TaskList[] = tasksData['data'];
   error = false;
   constructor() { }
   ngOnInit() {

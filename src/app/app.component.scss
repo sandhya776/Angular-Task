@@ -4,7 +4,7 @@
   // height: 500px;
   width: 100%;
   margin-bottom: 15px;
-  min-height: 50vh;
+  height: 50vh;
 }
 
 .createTask {
@@ -23,10 +23,12 @@
 .next {
   color: #21ac34;
   font-size: 20px;
+  cursor: pointer !important;
 }
 .del {
   font-size: 20px;
-  color: #ea2727;
+  color: #721313;
+  cursor: pointer !important;
 }
 .innEle {
   border-radius: 4px;
@@ -39,6 +41,7 @@ p {
 }
 .disabled {
   opacity: 0.3;
+  cursor: default !important;
 }
 .col-7 {
   min-height: 50px;
@@ -49,4 +52,8 @@ p {
    text-align: center;
    color: #21ac34;
    margin: auto;
+}
+.content{
+  overflow: hidden !important;
+  height: 39vh;
 }
